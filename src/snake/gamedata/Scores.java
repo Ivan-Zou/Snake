@@ -1,4 +1,4 @@
-package snake;
+package snake.gamedata;
 
 public class Scores {
 }

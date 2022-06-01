@@ -1,4 +1,5 @@
-package snake;
+package snake.misc;
 
 public enum Direction {
+
 }

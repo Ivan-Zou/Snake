@@ -1,4 +1,4 @@
-package snake;
+package snake.mechanics;
 
 public class GameMechanics {
 }
