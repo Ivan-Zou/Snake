@@ -27,14 +27,14 @@ public class RunSnake implements Runnable {
         highScoreLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
         scorePanel.add(highScoreLabel);
 
-        final GameMechanics snake = new GameMechanics(scoreLabel);
-        frame.add(snake, BorderLayout.CENTER);
-
         final JPanel statusPanel = new JPanel();
         frame.add(statusPanel, BorderLayout.SOUTH);
 
         final JLabel statusLabel = new JLabel("Running...");
         statusPanel.add(statusLabel);
+
+        final GameMechanics snake = new GameMechanics(scoreLabel, highScoreLabel, statusLabel);
+        frame.add(snake, BorderLayout.CENTER);
 
         frame.pack();
         frame.setVisible(true);
