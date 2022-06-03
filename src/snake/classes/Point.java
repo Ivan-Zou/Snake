@@ -3,13 +3,33 @@ package snake.classes;
 import snake.misc.Direction;
 
 public class Point {
-    int x, y;
-    Direction direction;
+    private int x, y;
+    private final Direction direction;
 
     Point(int x, int y, Direction direction) {
         this.x = x;
         this.y = y;
         this.direction = direction;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     @Override
