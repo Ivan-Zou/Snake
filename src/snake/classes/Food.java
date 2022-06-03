@@ -18,8 +18,8 @@ public class Food {
     }
 
     public void generate() {
-        position.x = getRandomInt(0, Constants.FIELD_SIZE - 1);
-        position.y = getRandomInt(0, Constants.FIELD_SIZE - 1);
+        position.setX(getRandomInt(0, Constants.FIELD_SIZE - 1));
+        position.setY(getRandomInt(0, Constants.FIELD_SIZE - 1));
     }
 
     private static int getRandomInt(int min, int max) {
@@ -33,8 +33,8 @@ public class Food {
 
     public void draw(Graphics g) {
         g.setColor(color);
-        g.fillRect(position.x * Constants.CELL_SIZE,
-                position.y * Constants.CELL_SIZE,
+        g.fillRect(position.getX() * Constants.CELL_SIZE,
+                position.getY() * Constants.CELL_SIZE,
                 Constants.CELL_SIZE,
                 Constants.CELL_SIZE);
     }
