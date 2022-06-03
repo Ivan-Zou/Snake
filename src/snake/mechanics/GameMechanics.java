@@ -5,7 +5,12 @@ import snake.classes.Snake;
 import snake.gamedata.Scores;
 import snake.misc.Constants;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.BorderFactory;
+import javax.swing.Timer;
+import javax.swing.SwingUtilities;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Dimension;
@@ -31,8 +36,10 @@ public class GameMechanics extends JPanel {
         Timer timer = new Timer(Constants.REFRESH_RATE, actionEvent -> tick());
 
         timer.start();
+        timer.setDelay(Constants.DELAY);
 
-        setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        setBorder(BorderFactory.createLineBorder(Color.GREEN));
+        setBackground(Color.BLACK);
         setFocusable(true);
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -52,7 +59,6 @@ public class GameMechanics extends JPanel {
 
     private void tick() {
         if (!field.gameOver()) {
-            snake.move();
             field.update();
             repaint();
             scores.setScores(field.getPoints());
@@ -64,7 +70,11 @@ public class GameMechanics extends JPanel {
             writeGameDataToFiles();
             status.setText("Game Over!");
             SwingUtilities.invokeLater(() -> {
-                JOptionPane.showMessageDialog(null, "Game Over\nPlay Again?");
+                JOptionPane.showMessageDialog(null,
+                        "Game Over\n" +
+                                "Score: " + scores.getScore() +
+                                " | High Score: " + scores.getHighScore() +
+                                "\nPlay Again?");
                 reset();
                 repaint();
             });
@@ -79,7 +89,6 @@ public class GameMechanics extends JPanel {
 
     public void reset() {
         writtenToFile = false;
-        snake.reset();
         field.reset();
         scores.reset();
         status.setText("Running...");
@@ -90,7 +99,6 @@ public class GameMechanics extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        snake.draw(g);
         field.draw(g);
     }
 
