@@ -1,22 +1,28 @@
 package snake.classes;
 
-import snake.misc.Constants;
-
 import java.awt.Graphics;
 
 public class Field {
     private final Snake snake;
-    private int[][] field;
+    private final Food food;
     private int points;
 
     public Field(Snake snake) {
         this.snake = snake;
+        food = new Food();
         reset();
     }
 
     public void reset() {
-        field = new int[Constants.FIELD_SIZE][Constants.FIELD_SIZE];
         points = 0;
+        snake.reset();
+        generateFood();
+    }
+
+    private void generateFood() {
+        do {
+            food.generate();
+        } while (snake.containsFood(food));
     }
 
     public int getPoints() {
@@ -24,18 +30,20 @@ public class Field {
     }
 
     public void update() {
-
+        snake.move();
+        if (snake.containsFood(food)) {
+            points++;
+            snake.grow();
+            generateFood();
+        }
     }
 
     public boolean gameOver() {
-        return false;
-    }
-
-    public int getCell(int x, int y) {
-        return field[y][x];
+        return snake.selfCollision() || snake.borderCollision();
     }
 
     public void draw(Graphics g) {
-
+        food.draw(g);
+        snake.draw(g);
     }
 }
