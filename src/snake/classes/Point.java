@@ -3,8 +3,8 @@ package snake.classes;
 import snake.misc.Direction;
 
 public class Point {
-    private int x, y;
     private final Direction direction;
+    private int x, y;
 
     Point(int x, int y, Direction direction) {
         this.x = x;
